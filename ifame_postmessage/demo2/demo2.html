@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="vue-element-admin,vue3-element-admin" />
+    <title>子页面</title>
+</head>
+
+<body>
+    子页面
+    <div>被嵌套的界面</div>
+    <button onclick="getToken()">获取token</button>
+</body>
+<script>
+    //  子传父
+    function getToken() {
+        window.parent.postMessage('message', '*')
+
+        // window.parent.postMessage('message', 'https://www.baidu.com/')
+    }
+
+    // 子监听父的消息：父传子
+    window.onload = function() {
+        window.addEventListener("message", (data) => {
+            console.log('子页面获取的父的token:', data.data)
+        });
+    }
+</script>
+
+</html>

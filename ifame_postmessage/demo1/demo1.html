@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="vue-element-admin,vue3-element-admin" />
+    <title>主界面</title>
+    <style>
+        iframe {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    主界面
+    <iframe id="iframe" src="http://192.168.1.208:5501/demo2.html" frameborder="0"></iframe>
+</body>
+<script>
+    let token = `99999999999999999`
+
+    // 父传子
+    function toToken() {
+        let iframe = document.getElementById("iframe").contentWindow;
+        iframe.postMessage(JSON.stringify(token), "*")
+
+        // iframe.postMessage(JSON.stringify(token), 'https://www.baidu.com/')
+    }
+
+    window.onload = function() {
+        // 子传父
+        window.addEventListener('message', function(e) { // 监听 message 事件
+            console.log('父监听成功，调取方法给子token。')
+            toToken();
+        });
+    }
+</script>
+
+</html>
